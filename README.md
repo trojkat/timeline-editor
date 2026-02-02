@@ -1,10 +1,23 @@
 # Timeline Editor
 
+![Timeline Editor](app.png)
+
 An offline timeline visualization editor that uses YAML format for defining timeline events.
 
 ## YAML Data Format
 
 The Timeline Editor uses a structured YAML format to define timeline events, metadata, and groupings.
+
+## Features
+
+- **Offline editing**: Works entirely in the browser with no server required
+- **Auto-save**: Content is automatically saved to browser localStorage
+- **Export**: Download timeline as YAML file
+- **Import**: Load YAML files from disk
+- **Share**: Generate shareable links with base64-encoded timeline data
+- **Resizable editor**: Adjust editor/visualization split
+- **Layout toggle**: Switch between horizontal and vertical layouts
+- **Live preview**: Timeline updates as you type (with 500ms debounce)
 
 ### Basic Structure
 
@@ -25,6 +38,8 @@ groups:                     # optional
     color: "#color"
     backgroundColor: "#color"
 ```
+
+You can use the description above as part of an AI prompt to generate a timeline for you.
 
 ### Field Descriptions
 
@@ -307,18 +322,6 @@ events:
 
 ---
 
-## Features
-
-- **Offline editing**: Works entirely in the browser with no server required
-- **Auto-save**: Content is automatically saved to browser localStorage
-- **Export**: Download timeline as YAML file
-- **Import**: Load YAML files from disk
-- **Share**: Generate shareable links with base64-encoded timeline data
-- **Resizable editor**: Adjust editor/visualization split
-- **Layout toggle**: Switch between horizontal and vertical layouts
-- **Live preview**: Timeline updates as you type (with 500ms debounce)
-
----
 
 ## Usage Tips
 
