@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Timeline Editor</title>
+    <link rel="stylesheet" href="libs/vis-timeline-graph2d.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Timeline Editor</h1>
+            <div class="controls">
+                <button id="btn-toggle-editor" class="btn" title="Toggle Editor">✏️ Edit</button>
+                <button id="btn-layout-toggle" class="btn" title="Toggle Layout">⚙️ Layout</button>
+                <button id="btn-new" class="btn">New</button>
+                <button id="btn-load" class="btn">Load</button>
+                <button id="btn-export" class="btn">Export</button>
+                <button id="btn-share" class="btn" title="Share as Link">🔗 Share</button>
+                <input type="file" id="file-input" accept=".yaml,.yml,.toml" style="display: none;">
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="editor-pane" id="editor-pane">
+                <textarea id="yaml-editor" spellcheck="false"></textarea>
+                <div id="error-message" class="error-toast hidden"></div>
+            </div>
+            <div class="resizer" id="drag-handle"></div>
+            <div class="visualizer-pane">
+                <h2 id="timeline-title" class="timeline-title"></h2>
+                <div id="timeline-visualization"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="libs/js-yaml.min.js"></script>
+    <script src="libs/vis-timeline-graph2d.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+:root {
+    --bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --accent-color: #3b82f6;
+    --editor-bg: #252526;
+    --border-color: #3e3e3e;
+    --header-height: 60px;
+    --timeline-bg: #ffffff;
+    --error-color: #ef4444;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.app-header {
+    height: var(--header-height);
+    background-color: var(--editor-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #2563eb;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Vertical Layout */
+.main-content.vertical {
+    flex-direction: column;
+}
+
+.editor-pane {
+    width: 40%;
+    min-width: 200px;
+    background-color: var(--editor-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Remove border-right as resizer will act as separator */
+}
+
+/* Hidden by default */
+.editor-pane.hidden {
+    display: none;
+}
+
+/* Vertical Layout - Editor Pane */
+.main-content.vertical .editor-pane {
+    width: 100%;
+    height: 40%;
+    min-height: 150px;
+}
+
+.resizer {
+    width: 5px;
+    background-color: var(--border-color);
+    cursor: col-resize;
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+/* Hidden by default */
+.resizer.hidden {
+    display: none;
+}
+
+/* Vertical Layout - Resizer */
+.main-content.vertical .resizer {
+    width: 100%;
+    height: 5px;
+    cursor: row-resize;
+}
+
+.resizer:hover,
+.resizer.active {
+    background-color: var(--accent-color);
+}
+
+#yaml-editor {
+    flex: 1;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    padding: 20px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+}
+
+.visualizer-pane {
+    flex: 1;
+    background-color: var(--timeline-bg);
+    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Timeline */
+.timeline-title {
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding: 0 20px;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #333;
+    display: none;
+    /* Hidden by default, shown when title exists */
+    flex-shrink: 0;
+}
+
+#timeline-visualization {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+.error-toast {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--error-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.error-toast.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Customizing Vis.js Timeline */
+.vis-timeline {
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.vis-item {
+    background-color: var(--accent-color);
+    border-color: #2563eb;
+    color: white;
+    border-radius: 3px;
+}
+
+.vis-item.vis-selected {
+    background-color: #60a5fa;
+    border-color: white;
+}
+
+.vis-time-axis .vis-text {
+    color: #333333;
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+    border-color: #e5e5e5;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+    border-color: #d4d4d4;
+}
