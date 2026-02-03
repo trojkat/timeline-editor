@@ -66,13 +66,10 @@ events:
         let dataLoaded = false;
         if (sharedData) {
             try {
-                // UTF-8 compatible base64 decoding
-                const decodedData = decodeURIComponent(
-                    atob(sharedData)
-                        .split('')
-                        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-                        .join('')
-                );
+                // Simple base64 decoding with UTF-8 support
+                const binaryString = atob(sharedData);
+                const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0));
+                const decodedData = new TextDecoder().decode(bytes);
                 editor.value = decodedData;
                 localStorage.setItem('timeline_content', decodedData);
                 dataLoaded = true;
@@ -412,12 +409,10 @@ events:
     function shareAsLink() {
         try {
             const yamlContent = editor.value;
-            // UTF-8 compatible base64 encoding
-            const encodedData = btoa(
-                encodeURIComponent(yamlContent).replace(/%([0-9A-F]{2})/g, (match, p1) =>
-                    String.fromCharCode('0x' + p1)
-                )
-            );
+            // Simple base64 encoding with UTF-8 support
+            const bytes = new TextEncoder().encode(yamlContent);
+            const binaryString = String.fromCharCode(...bytes);
+            const encodedData = btoa(binaryString);
             const shareUrl = `${window.location.origin}${window.location.pathname}?data=${encodedData}`;
 
             // Copy to clipboard
