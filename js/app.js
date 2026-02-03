@@ -63,6 +63,7 @@ events:
         const editorVisible = localStorage.getItem('editor_visible') === 'true';
 
         // Prioritize shared data from URL
+        let dataLoaded = false;
         if (sharedData) {
             try {
                 // UTF-8 compatible base64 decoding
@@ -74,6 +75,7 @@ events:
                 );
                 editor.value = decodedData;
                 localStorage.setItem('timeline_content', decodedData);
+                dataLoaded = true;
                 // Clear URL parameter after loading
                 window.history.replaceState({}, document.title, window.location.pathname);
             } catch (e) {
@@ -129,6 +131,14 @@ events:
         // Autoscale to fit all events
         if (timeline) {
             setTimeout(() => timeline.fit(), 100);
+        }
+
+        // If data was loaded from URL, update timeline again to ensure it renders
+        if (dataLoaded) {
+            setTimeout(() => {
+                updateTimeline();
+                timeline.fit();
+            }, 200);
         }
 
         // Event Listeners
